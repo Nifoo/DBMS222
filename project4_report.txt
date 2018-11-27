@@ -1,0 +1,48 @@
+1. Basic information
+Team number (e.g., 01) : 20
+#1 Student ID : 53041238
+#1 Student Name : Peng Hao
+#2 Student ID : 34085220
+#2 Student Name : Hao Chen
+OS (bit) :ubuntu 16.04 LTS 64bit
+gcc version :gcc (Ubuntu 5.4.0-6ubuntu1~16.04.4) 5.4.0 20160609
+
+
+2.
+
+
+2. Catalog information about Index
+- Show your catalog information about an index (tables, columns). 
+We organize index files based on their filename with "Table_Attribute" format. We can find and operate with the indicated index file in O(1) time cost.
+
+3. Block Nested Loop Join (If you have implemented this feature)
+- Describe how your block nested loop join works (especially, how you manage the given buffers.)
+We assign no more than (pageNums - 2.5) * PAGE_SIZE space to outer record. Firstly read them into memory, and then read a inner record into memory, and we assume it could take 1 page. Finally the output joined record, we assign a page for it. We use std::map(<templet T, structure Offset>) to process the selected attribute of outer data, where the T is the attribute type and the Offset is a structure of offset and length of this outer data. For a given inner data, find its selected attribute data in map and then join.
+
+4. Index Nested Loop Join (If you have implemented this feature)
+- Describe how your grace hash join works.
+According the outer selected attribute data, see if the inner index file is the corresponding one. If it is, set the scanIterator with proper parameters (highkey, lowkey, highInclusive, lowInclusive ... ) according to the condition (<, >, ... NOT ONLY "EQUAL" OPERATION) required in order to boost the search process.
+
+5. Grace Hash Join (If you have implemented this feature)
+- Describe how your grace hash join works (especially, in-memory structure).
+
+In fact we didn't realize grace hash join.
+
+6. Aggregation
+- Describe how your aggregation (basic, group-based hash) works.
+Answer: My aggregation involves "MAX", "MIN", "SUM", "AVG", "COUNT", and it is a basic aggregation. "MAX" and "MIN" use a float number to store the maximun 
+or minimum number and conpared with the next number obtained by getNextTuple function, and finally obtain the required number. "SUM" adds up all numbers 
+one by one and obtains the final result. "COUNT" use getNextTuple function to obtain the number of records. "AVG" basicly use the sum devided by count to 
+get the required result.
+
+7. Implementation Detail
+- Have you added your own source file (.cc or .h)?
+No
+- Have you implemented any optional features? Then, describe them here.
+No
+- Other implementation details:
+Nothing special.
+
+6. Other (optional)
+- Freely use this section to tell us about things that are related to the project 4, but not related to the other sections (optional)
+Implement not only "Equal" join, but also "<, >, <=, >=, !=" join.
